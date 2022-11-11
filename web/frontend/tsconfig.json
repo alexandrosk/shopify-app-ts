@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+      "module": "esnext",
+      "allowJs": true,
+      "lib": [
+        "dom",
+        "dom.iterable",
+        "esnext"
+      ],
+      "esModuleInterop": true,
+      "target": "esnext",
+      "noImplicitAny": true,
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "skipLibCheck": true,
+      "allowSyntheticDefaultImports": true,
+      "outDir": "dist",
+      "baseUrl": ".",
+      "noEmit": true,
+      "paths": {
+        "*": [
+          "node_modules/*"
+        ]
+      },
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "jsx": "react-jsx","types": ["vite/client"]
+    },
+    "include": [
+      "**/*.ts",
+      "**/*.tsx", 
+      "**/*.js",
+      "**/*.jsx",
+      ],
+    "exclude": [
+      "node_modules/**"
+    ]
+  }
+  
