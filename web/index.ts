@@ -1,4 +1,6 @@
 // @ts-check
+import * as dotenv from 'dotenv'
+dotenv.config({ path: `${process.cwd()}/../.env` });
 import { join } from "path";
 import { readFileSync } from "fs";
 import express from "express";
@@ -16,6 +18,10 @@ import productCreator from "./helpers/product-creator.js";
 import redirectToAuth from "./helpers/redirect-to-auth.js";
 import { AppInstallations } from "./app_installations.js";
 import { environment } from "./environment.js";
+import * as trpcExpress from "@trpc/server/adapters/express";
+import webhooks from "./webhooks.js";
+import {appRouter} from "./server/routers/_app.js";
+import {createContext} from "./server/context.js";
 
 const USE_ONLINE_TOKENS = false;
 
@@ -25,7 +31,6 @@ const PORT = parseInt(environment.BACKEND_PORT || environment.PORT, 10);
 const DEV_INDEX_PATH = `${process.cwd()}/frontend/`;
 const PROD_INDEX_PATH = `${process.cwd()}/frontend/dist/`;
 
-const DB_PATH = `${process.cwd()}/database.sqlite`;
 
 Shopify.Context.initialize({
   API_KEY: environment.SHOPIFY_API_KEY,
@@ -35,16 +40,11 @@ Shopify.Context.initialize({
   HOST_SCHEME: environment.HOST.split("://")[0],
   API_VERSION: LATEST_API_VERSION,
   IS_EMBEDDED_APP: true,
-  // This should be replaced with your preferred storage strategy
-  SESSION_STORAGE: new Shopify.Session.SQLiteSessionStorage(DB_PATH),
+  //@todo replace with railway url like redis://default:xxxx@containers-us-west-xx.railway.app:7037
+  SESSION_STORAGE: new Shopify.Session.RedisSessionStorage(process.env.REDIS_URL as any),
 });
 
-Shopify.Webhooks.Registry.addHandler("APP_UNINSTALLED", {
-  path: "/api/webhooks",
-  webhookHandler: async (_topic, shop, _body) => {
-    await AppInstallations.delete(shop);
-  },
-});
+Shopify.Webhooks.Registry.addHandlers(webhooks);
 
 // The transactions with Shopify will always be marked as test transactions, unless NODE_ENV is production.
 // See the ensureBilling helper to learn more about billing in this template.
@@ -61,10 +61,6 @@ const BILLING_SETTINGS: BillingSettingsType = {
   // interval: BillingInterval.OneTime,
 };
 
-// This sets up the mandatory GDPR webhooks. You’ll need to fill in the endpoint
-// in the “GDPR mandatory webhooks” section in the “App setup” tab, and customize
-// the code when you store customer data.
-//
 // More details can be found on shopify.dev:
 // https://shopify.dev/apps/webhooks/configuration/mandatory-webhooks
 setupGDPRWebHooks("/api/webhooks");
@@ -164,6 +160,14 @@ export async function createServer(
     next();
   });
 
+  app.use(
+      '/trpc',
+      trpcExpress.createExpressMiddleware({
+        router: appRouter,
+        createContext,
+      }),
+  );
+
   if (isProd) {
     const compression = await import("compression").then(
       ({ default: fn }) => fn,
@@ -208,5 +212,7 @@ export async function createServer(
 
   return { app };
 }
+
+
 
 createServer().then(({ app }) => app.listen(PORT));

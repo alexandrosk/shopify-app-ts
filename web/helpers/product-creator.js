@@ -114,3 +114,4 @@ function randomTitle() {
 function randomPrice() {
   return Math.round((Math.random() * 10 + Number.EPSILON) * 100) / 100;
 }
+

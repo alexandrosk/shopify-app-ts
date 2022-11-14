@@ -88,6 +88,7 @@ async function hasActivePayment(
         },
       });
       purchases =
+          // @ts-ignore
         currentInstallations.body.data.currentAppInstallation.oneTimePurchases;
 
       for (let i = 0, len = purchases.edges.length; i < len; i++) {

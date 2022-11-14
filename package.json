@@ -1,5 +1,5 @@
 {
-  "name": "fullstack-app-template",
+  "name": "shopify-ts-template",
   "version": "1.0.0",
   "main": "web/index.js",
   "license": "UNLICENSED",
@@ -15,5 +15,5 @@
     "@shopify/app": "3.16.2",
     "@shopify/cli": "3.16.2"
   },
-  "author": "kai"
+  "author": "alexk"
 }
