@@ -4,6 +4,7 @@ import { trpc } from '../utils/trpc';
 
 export default function PageName() {
   const {data,isLoading} = trpc.getUser.useQuery();
+  const shop = trpc.getShop.useQuery();
   if (isLoading) return <div>Loading...</div>;
   else
   return (
@@ -27,6 +28,7 @@ export default function PageName() {
             <Heading>{data}</Heading>
             <TextContainer>
               <p>{data}</p>
+              <p>{shop?.data}</p>
             </TextContainer>
           </Card>
           <Card sectioned>

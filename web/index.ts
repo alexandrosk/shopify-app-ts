@@ -95,7 +95,6 @@ export async function createServer(
       }
     }
   });
-
   app.use(
       '/api/trpc',
       trpcExpress.createExpressMiddleware({
@@ -103,6 +102,7 @@ export async function createServer(
         createContext,
       }),
   );
+
   // All endpoints after this point will require an active session
   app.use(
     "/api/*",
