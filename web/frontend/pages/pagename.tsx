@@ -24,9 +24,9 @@ export default function PageName() {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <Heading>{JSON.parse(data)}</Heading>
+            <Heading>{data}</Heading>
             <TextContainer>
-              <p>Body</p>
+              <p>{data}</p>
             </TextContainer>
           </Card>
           <Card sectioned>
