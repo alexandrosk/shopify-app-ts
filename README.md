@@ -4,10 +4,8 @@ This is a template for building a [Shopify app](https://shopify.dev/apps/getting
 
 🚀 It contains the basics for building a Shopify app + Typesafety, tRPC routers redis and prisma! 🚀
 
-#### 🚧 This is a work in progress please use at your own risk 🚧
- WIP - We still miss  
-1. Prisma integration
-2. Save shop to prisma
+#### 🚧 This is kinda WIP please use at your own risk 
+ 
 
 ## 🟢 What works
 [x] - Shopify CLI, create theme-app-extensions deploy etc

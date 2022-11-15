@@ -28,7 +28,7 @@ export default function PageName() {
             <Heading>{data}</Heading>
             <TextContainer>
               <p>{data}</p>
-              <p>{shop?.data}</p>
+              <p>App installed on stores: {shop?.data}</p>
             </TextContainer>
           </Card>
           <Card sectioned>

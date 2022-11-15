@@ -1,4 +1,5 @@
 import { Shopify } from "@shopify/shopify-api";
+import prisma from "./server/prisma.js";
 
 export const AppInstallations = {
   includes: async function (shopDomain: string) {
@@ -9,7 +10,22 @@ export const AppInstallations = {
 
     if (shopSessions.length > 0) {
       for (const session of shopSessions) {
-        if (session.accessToken) return true;
+        if (session.accessToken) {
+          await prisma.shop.upsert({
+            where: { shop: shopDomain },
+            update: {},
+            create: {
+                shop: shopDomain,
+                scopes: session.scope as string,
+                isInstalled: true,
+                installedAt: new Date(),
+                installCount: 1,
+                subscribeCount: 1,
+                showOnboarding: false,
+              }
+          });
+          return true;
+        }
       }
     }
 
@@ -22,9 +38,14 @@ export const AppInstallations = {
         shopDomain,
       )) || [];
     if (shopSessions.length > 0) {
-      await Shopify.Context.SESSION_STORAGE.deleteSessions?.(
+      const deleteSession = await Shopify.Context.SESSION_STORAGE.deleteSessions?.(
         shopSessions.map((session) => session.id),
       );
+      if (deleteSession) {
+        await prisma.shop.delete({
+          where: { shop: shopDomain },
+        });
+      }
     }
   },
 };
