@@ -32,6 +32,7 @@ const DEV_INDEX_PATH = `${process.cwd()}/frontend/`;
 const PROD_INDEX_PATH = `${process.cwd()}/frontend/dist/`;
 
 
+
 Shopify.Context.initialize({
   API_KEY: environment.SHOPIFY_API_KEY,
   API_SECRET_KEY: environment.SHOPIFY_API_SECRET,
@@ -40,7 +41,6 @@ Shopify.Context.initialize({
   HOST_SCHEME: environment.HOST.split("://")[0],
   API_VERSION: LATEST_API_VERSION,
   IS_EMBEDDED_APP: true,
-  //@todo replace with railway url like redis://default:xxxx@containers-us-west-xx.railway.app:7037
   SESSION_STORAGE: new Shopify.Session.RedisSessionStorage(process.env.REDIS_URL as any),
 });
 
@@ -96,6 +96,13 @@ export async function createServer(
     }
   });
 
+  app.use(
+      '/api/trpc',
+      trpcExpress.createExpressMiddleware({
+        router: appRouter,
+        createContext,
+      }),
+  );
   // All endpoints after this point will require an active session
   app.use(
     "/api/*",
@@ -141,6 +148,7 @@ export async function createServer(
   // attribute, as a result of the express.json() middleware
   app.use(express.json());
 
+
   app.use((req, res, next) => {
     const shopQuery = req.query.shop;
     if (!shopQuery) throw new Error("No shop query parameter provided");
@@ -159,14 +167,6 @@ export async function createServer(
     }
     next();
   });
-
-  app.use(
-      '/trpc',
-      trpcExpress.createExpressMiddleware({
-        router: appRouter,
-        createContext,
-      }),
-  );
 
   if (isProd) {
     const compression = await import("compression").then(

@@ -13,13 +13,6 @@ export const createContext = async (
     // @ts-ignore
     const session = await Shopify.Utils.loadCurrentSession(req, res, true);
 
-        if (res && isSessionActive(session)) {
-        res.setHeader(
-            'Content-Security-Policy',
-            `frame-ancestors https://${session?.shop} https://admin.shopify.com;`
-        );
-    }
-
     return {
         req,
         res,
@@ -29,5 +22,3 @@ export const createContext = async (
 };
 
 export type Context = trpc.inferAsyncReturnType<typeof createContext>;
-
-export const createRouter = () => trpc.router<Context>();

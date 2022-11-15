@@ -1,7 +1,9 @@
 {
-  "name": "shopify-app-template-node",
+  "name": "shopify-app-ts",
   "private": true,
   "license": "UNLICENSED",
+  "version": "1.0.0",
+  "main": "src/index.ts",
   "scripts": {
     "build": "tsc --skipLibCheck && npm run build:client",
     "build:client": "vite build --outDir dist/client",

@@ -4,10 +4,7 @@ import { z } from 'zod';
 export const t = initTRPC.create();
 
 export const appRouter = t.router({
-    getUser: t.procedure.input(z.string()).query((req) => {
-        req.input; // string
-        return { id: 'a', name: 'Bilbo' };
-    })
+    getUser: t.procedure.query(() => 'hello tRPC v10!'),
 });
 
 // export type definition of API

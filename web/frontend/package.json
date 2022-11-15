@@ -19,6 +19,11 @@
     "@shopify/app-bridge-react": "^3.1.0",
     "@shopify/app-bridge-utils": "^3.1.0",
     "@shopify/polaris": "^9.11.0",
+    "@tanstack/react-query": "^4.16.1",
+    "@tanstack/react-query-devtools": "^4.16.1",
+    "@trpc/client": "10.0.0-rc.8",
+    "@trpc/react-query": "10.0.0-rc.8",
+    "@trpc/server": "10.0.0-rc.8",
     "@vitejs/plugin-react": "1.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -27,6 +32,7 @@
     "vite": "^2.8.6"
   },
   "devDependencies": {
+    "@types/server": "^1.0.5",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "eslint": "^8.24.0",

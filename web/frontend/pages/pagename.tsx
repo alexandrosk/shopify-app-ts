@@ -1,7 +1,11 @@
 import { Card, Page, Layout, TextContainer, Heading } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
+import { trpc } from '../utils/trpc';
 
 export default function PageName() {
+  const {data,isLoading} = trpc.getUser.useQuery();
+  if (isLoading) return <div>Loading...</div>;
+  else
   return (
     <Page>
       <TitleBar
@@ -20,7 +24,7 @@ export default function PageName() {
       <Layout>
         <Layout.Section>
           <Card sectioned>
-            <Heading>Heading</Heading>
+            <Heading>{JSON.parse(data)}</Heading>
             <TextContainer>
               <p>Body</p>
             </TextContainer>
