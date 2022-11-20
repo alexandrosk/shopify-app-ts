@@ -1,29 +1,32 @@
-# 🌍Shopify Node App with Typescript tRPC, Redis and Prisma [WIP]
+# 🌍 Shopify Node App with Typescript tRPC, Redis and Prisma [WIP]
 
 This is a template for building a [Shopify app](https://shopify.dev/apps/getting-started) using Node and React.
 
 🚀 It contains the basics for building a Shopify app + Typesafety, tRPC routers redis and prisma! 🚀
 
-#### 🚧 This is kinda WIP please use at your own risk 
+#### 🟢 Ready to use on your next project! 
+#### Commits and PRs are welcome! :) 
  
 
 ## 🟢 What works
-[x] - Shopify CLI, create theme-app-extensions deploy etc
+[✅] - Shopify CLI, create theme-app-extensions deploy etc
 
-[x] - tRPC
+[✅] - tRPC
 
-[x] - Express & Node
+[✅] - Express & Node
 
-[x] - Redis
+[✅] - Redis
 
-[x] - Prisma DB client works
+[✅] - Prisma DB client works
+
+[✅] - Typesafe GraphQL Codegen Generator
 
 
 ## Benefits
 
 Typesafety over all! 
-Plus main node shopify functionalities like theme-app-extensions etc
-Railway for redis and prisma
+Plus main node shopify functionalities like theme-app-extensions are working out of the box for **embedded apps**.
+I'm using Railway for redis and prisma.
 
 ## Tech Stack
 
@@ -36,6 +39,7 @@ This template combines a number of third party open-source tools:
 - [Prisma](https://www.prisma.io/) ORM
 - [Trpc](https://trpc.io/) for API routing
 - [Redis](https://redis.io/) for caching
+- [Graphql](https://the-guild.dev/graphql/codegen) for graphql codegen
 
 The following Shopify tools complement these third-party tools to ease app development:
 
@@ -69,6 +73,13 @@ Using pnpm:
 ```shell
 pnpm run dev
 ```
+
+**To generate Graphql**, write some queries under graphql and run:
+```shell
+cd web/frontend && 
+pnpm generate
+```
+
 
 Open the URL generated in your console. Once you grant permission to the app, you can start development.
 
