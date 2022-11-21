@@ -22,9 +22,13 @@ export default function App() {
                             <NavigationMenu
                                 navigationLinks={[
                                     {
-                                        label: "Page name",
+                                        label: "Trpc",
                                         destination: "/pagename",
                                     },
+                                    {
+                                        label: "Billing",
+                                        destination: "/plan",
+                                    }
                                 ]}
                             />
                             <Routes pages={pages}/>

@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@prisma/client': ^4.6.1
   '@shopify/shopify-api': ^5.0.0
-  '@trpc/server': 10.0.0-rc.5
+  '@trpc/server': 10.0.0-rc.6
   '@types/compression': ^1.7.2
   '@types/cookie-parser': ^1.4.3
   '@types/cors': ^2.8.12
@@ -12,6 +12,7 @@ specifiers:
   '@types/node': ^18.8.2
   '@typescript-eslint/parser': ^5.39.0
   '@upstash/redis': ^1.16.0
+  body-parser: ^1.20.1
   compression: ^1.7.4
   cookie-parser: ^1.4.6
   cross-env: ^7.0.3
@@ -39,8 +40,9 @@ specifiers:
 dependencies:
   '@prisma/client': 4.6.1_prisma@4.6.1
   '@shopify/shopify-api': 5.2.0
-  '@trpc/server': 10.0.0-rc.5
+  '@trpc/server': 10.0.0-rc.6
   '@upstash/redis': 1.16.0
+  body-parser: 1.20.1
   compression: 1.7.4
   cookie-parser: 1.4.6
   cross-env: 7.0.3
@@ -302,9 +304,8 @@ packages:
     dev: false
     optional: true
 
-  /@trpc/server/10.0.0-rc.5:
-    resolution: {integrity: sha512-SMj1uFL1iocYDCkLFrjyiRCAQFFA6uu7kWhIZGpWFGcZMl805CVuliWdbYcHbGU0diF/BlEAJ5BWZsfjnOkDXA==}
-    deprecated: Use ^10.0.0-rc.6
+  /@trpc/server/10.0.0-rc.6:
+    resolution: {integrity: sha512-8JAIX2SSTEwpdp+CRoPGsrj9A9qee0ltqa1fPXlKOtzQKbxDjGoqy6kVVh25YUJ8GJrXf4LhV8pZGkyZOOX6ow==}
     dev: false
 
   /@tsconfig/node10/1.0.9:
@@ -720,6 +721,26 @@ packages:
       iconv-lite: 0.4.24
       on-finished: 2.4.1
       qs: 6.10.3
+      raw-body: 2.5.1
+      type-is: 1.6.18
+      unpipe: 1.0.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
+  /body-parser/1.20.1:
+    resolution: {integrity: sha512-jWi7abTbYwajOytWCQc37VulmWiRae5RyTpaCyDcS5/lMdtwSz5lOpDE67srw/HYe35f1z3fDQw+3txg7gNtWw==}
+    engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
+    dependencies:
+      bytes: 3.1.2
+      content-type: 1.0.4
+      debug: 2.6.9
+      depd: 2.0.0
+      destroy: 1.2.0
+      http-errors: 2.0.0
+      iconv-lite: 0.4.24
+      on-finished: 2.4.1
+      qs: 6.11.0
       raw-body: 2.5.1
       type-is: 1.6.18
       unpipe: 1.0.0
@@ -2648,6 +2669,13 @@ packages:
 
   /qs/6.10.3:
     resolution: {integrity: sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
+    dev: false
+
+  /qs/6.11.0:
+    resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4

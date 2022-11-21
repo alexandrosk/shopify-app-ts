@@ -42,8 +42,11 @@ export const AppInstallations = {
         shopSessions.map((session) => session.id),
       );
       if (deleteSession) {
-        await prisma.shop.delete({
-          where: { shop: shopDomain },
+        await prisma.shop.update({
+            where: { shop: shopDomain },
+            data: {
+                isInstalled: false,
+            }
         });
       }
     }

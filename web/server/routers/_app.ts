@@ -9,6 +9,9 @@ export const appRouter = t.router({
     getShop: t.procedure.query((ctx) => {
         return prisma.shop.count();
     }),
+    getSession: t.procedure.query((ctx) => {
+        console.log(ctx);
+    })
 });
 
 // export type definition of API

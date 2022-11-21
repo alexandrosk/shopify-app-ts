@@ -1,0 +1,50 @@
+query getProducts($first: Int!) {
+	products(first: $first) {
+		nodes {
+			id
+			title
+			priceRangeV2 {
+				maxVariantPrice {
+					amount
+					currencyCode
+				}
+				minVariantPrice {
+					amount
+					currencyCode
+				}
+			}
+		}
+	}
+}
+
+query getProductById($id: ID!) {
+	product(id: $id) {
+		id
+		title
+		priceRangeV2 {
+			maxVariantPrice {
+				amount
+				currencyCode
+			}
+			minVariantPrice {
+				amount
+				currencyCode
+			}
+		}
+	}
+}
+
+query getProductsByIds($ids: [ID!]!) {
+	nodes(ids: $ids) {
+		... on Product {
+			id
+			variants(first: 100) {
+				edges {
+					node {
+						title
+					}
+				}
+			}
+		}
+	}
+}

@@ -22,7 +22,6 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import webhooks from "./webhooks.js";
 import {appRouter} from "./server/routers/_app.js";
 import {createContext} from "./server/context.js";
-
 const USE_ONLINE_TOKENS = false;
 
 const PORT = parseInt(environment.BACKEND_PORT || environment.PORT, 10);
@@ -111,12 +110,14 @@ export async function createServer(
     }),
   );
 
+
   app.get("/api/products/count", async (req, res) => {
     const session = await Shopify.Utils.loadCurrentSession(
       req,
       res,
       app.get("use-online-tokens"),
     );
+    console.log(session);
     const { Product } = await import(
       `@shopify/shopify-api/dist/rest-resources/${Shopify.Context.API_VERSION}/index.js`
     );
@@ -148,6 +149,33 @@ export async function createServer(
   // attribute, as a result of the express.json() middleware
   app.use(express.json());
 
+
+  app.post('/api/graphql', async (req: any, res: any) => {
+    const session = await Shopify.Utils.loadCurrentSession(
+        req,
+        res,
+        app.get("use-online-tokens"),
+    );
+    const shopName: string|undefined = session?.shop;
+    const token: string|undefined = session?.accessToken;
+
+    const options = {
+      data: req.body
+    };
+
+    try {
+      if (shopName && token) {
+        const client = new Shopify.Clients.Graphql(shopName, token);
+        const response = await client.query(options);
+
+        res.status(200).send(response);
+      }
+
+    } catch (err: any) {
+      console.error(err.message);
+      res.status(500).send(err.message);
+    }
+  });
 
   app.use((req, res, next) => {
     const shopQuery = req.query.shop;
