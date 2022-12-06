@@ -1,16 +1,26 @@
 import { initTRPC } from '@trpc/server';
 import { z } from 'zod';
 import { prisma } from "../prisma.js";
+import superjson from 'superjson';
+import { Context } from '../context';
+export const t = initTRPC.context<Context>().create({transformer: superjson});
+export const publicProcedure = t.procedure;
+export const middleware = t.middleware;
 
-export const t = initTRPC.create();
 
 export const appRouter = t.router({
-    getUser: t.procedure.query(() => 'hello tRPC v10!'),
-    getShop: t.procedure.query((ctx) => {
-        return prisma.shop.count();
+    getUser: publicProcedure.query(() => 'hello tRPC v10!'),
+    getShop: publicProcedure.query(({ctx}) => {
+        console.log(ctx.session);
+        return ctx.prisma.shop.count();
     }),
-    getSession: t.procedure.query((ctx) => {
+    getSession: publicProcedure.query((ctx) => {
         console.log(ctx);
+    }),
+    appContext: publicProcedure.query((ctx) => {
+        return {
+            user: ctx
+        };
     })
 });
 

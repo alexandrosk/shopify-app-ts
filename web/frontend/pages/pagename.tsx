@@ -5,6 +5,7 @@ import { trpc } from '../utils/trpc';
 export default function PageName() {
   const {data,isLoading} = trpc.getUser.useQuery();
   const shop = trpc.getShop.useQuery();
+  //const session = trpc.getSession.useQuery();
   if (isLoading) return <div>Loading...</div>;
   else
   return (

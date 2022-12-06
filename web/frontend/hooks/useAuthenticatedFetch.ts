@@ -1,4 +1,4 @@
-import { authenticatedFetch } from "@shopify/app-bridge-utils";
+import {authenticatedFetch, getSessionToken} from "@shopify/app-bridge-utils";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
 import { ClientApplication, AppBridgeState } from "@shopify/app-bridge";
@@ -21,9 +21,17 @@ export function useAuthenticatedFetch() {
 
   return async (uri: RequestInfo, options?: RequestInit) => {
     const response = await fetchFunction(uri, options);
+
     checkHeadersForReauthorization(response.headers, app);
     return response;
   };
+}
+
+export async function getSessiontoken(): Promise<string> {
+  const app = useAppBridge();
+  return getSessionToken(app).then((token) => {
+    return token;
+  });
 }
 
 function checkHeadersForReauthorization(

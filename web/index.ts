@@ -94,13 +94,6 @@ export async function createServer(
       }
     }
   });
-  app.use(
-      '/api/trpc',
-      trpcExpress.createExpressMiddleware({
-        router: appRouter,
-        createContext,
-      }),
-  );
 
   // All endpoints after this point will require an active session
   app.use(
@@ -110,6 +103,14 @@ export async function createServer(
     }),
   );
 
+  app.use(
+      '/api/trpc',
+      trpcExpress.createExpressMiddleware({
+        router: appRouter,
+        createContext,
+      }),
+  );
+
 
   app.get("/api/products/count", async (req, res) => {
     const session = await Shopify.Utils.loadCurrentSession(
@@ -117,7 +118,7 @@ export async function createServer(
       res,
       app.get("use-online-tokens"),
     );
-    console.log(session);
+
     const { Product } = await import(
       `@shopify/shopify-api/dist/rest-resources/${Shopify.Context.API_VERSION}/index.js`
     );
@@ -132,6 +133,7 @@ export async function createServer(
       res,
       app.get("use-online-tokens"),
     );
+    console.log(session);
     let status = 200;
     let error = null;
 
@@ -168,7 +170,7 @@ export async function createServer(
         const client = new Shopify.Clients.Graphql(shopName, token);
         const response = await client.query(options);
 
-        res.status(200).send(response);
+        res.status(200).send(response.body);
       }
 
     } catch (err: any) {
