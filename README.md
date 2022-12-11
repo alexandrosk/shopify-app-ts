@@ -102,6 +102,14 @@ cd web/frontend/ && SHOPIFY_API_KEY=REPLACE_ME pnpm run build
 
 You do not need to build the backend.
 
+## Theme app extensions
+
+[Easily add theme app extensions](https://shopify.dev/apps/online-store/theme-app-extensions/getting-started)
+
+```shell
+npm run shopify app generate extension
+```
+
 ## Hosting
 
 I personally prefer digitalocean apps, easy to setup and cheap! You can use this link to signup with a referral :) 
