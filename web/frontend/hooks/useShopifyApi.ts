@@ -1,5 +1,5 @@
-import { GraphQLClient } from 'graphql-request';
-import { useAuthenticatedFetch } from './useAuthenticatedFetch';
+import { GraphQLClient } from "graphql-request";
+import { useAuthenticatedFetch } from "./useAuthenticatedFetch";
 
 /**
  * A hook for querying and mutating admin data.
@@ -11,15 +11,15 @@ import { useAuthenticatedFetch } from './useAuthenticatedFetch';
  * @returns {Array} An array containing the query data, loading state, and error state.
  */
 export const useShopifyApi = <TData, TVariables>(
-    query: string
+  query: string
 ): ((variables: TVariables | undefined) => Promise<TData>) => {
-    const authenticatedFetch = useAuthenticatedFetch();
+  const authenticatedFetch = useAuthenticatedFetch();
 
-    const graphQLClient = new GraphQLClient('/api/graphql', {
-        fetch: authenticatedFetch,
-    });
+  const graphQLClient = new GraphQLClient("/api/graphql", {
+    fetch: authenticatedFetch,
+  });
 
-    return async (variables) => {
-        return (await graphQLClient.rawRequest(query, variables)).data;
-    };
+  return async (variables) => {
+    return (await graphQLClient.rawRequest(query, variables)).data;
+  };
 };
