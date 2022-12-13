@@ -106,6 +106,9 @@ You do not need to build the backend.
 
 [Easily add theme app extensions](https://shopify.dev/apps/online-store/theme-app-extensions/getting-started)
 
+Important to know you might need to go to 
+https://partners.shopify.com/ > All apps > Your app > *Browse Extensions* and enable to work
+
 ```shell
 npm run shopify app generate extension
 ```
