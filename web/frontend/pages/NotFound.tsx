@@ -7,7 +7,7 @@ export default function NotFound() {
       <Card>
         <Card.Section>
           <EmptyState
-            heading='There is no page at this address'
+            heading="There is no page at this address"
             image={notFoundImage}
           >
             <p>

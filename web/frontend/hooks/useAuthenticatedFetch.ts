@@ -1,4 +1,4 @@
-import {authenticatedFetch, getSessionToken} from "@shopify/app-bridge-utils";
+import { authenticatedFetch, getSessionToken } from "@shopify/app-bridge-utils";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { Redirect } from "@shopify/app-bridge/actions";
 import { ClientApplication, AppBridgeState } from "@shopify/app-bridge";
@@ -36,7 +36,7 @@ export async function getSessiontoken(): Promise<string> {
 
 function checkHeadersForReauthorization(
   headers: Headers,
-  app: ClientApplication<AppBridgeState>,
+  app: ClientApplication<AppBridgeState>
 ) {
   if (headers.get("X-Shopify-API-Request-Failure-Reauthorize") === "1") {
     const authUrlHeader =
@@ -48,7 +48,7 @@ function checkHeadersForReauthorization(
       Redirect.Action.REMOTE,
       authUrlHeader.startsWith("/")
         ? `https://${window.location.host}${authUrlHeader}`
-        : authUrlHeader,
+        : authUrlHeader
     );
   }
 }

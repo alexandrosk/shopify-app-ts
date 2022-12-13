@@ -55,7 +55,7 @@ export function ProductsCard() {
     <>
       {toastMarkup}
       <Card
-        title='Product Counter'
+        title="Product Counter"
         sectioned
         primaryFooterAction={{
           content: "Populate 5 products",
@@ -63,15 +63,15 @@ export function ProductsCard() {
           loading: isLoading,
         }}
       >
-        <TextContainer spacing='loose'>
+        <TextContainer spacing="loose">
           <p>
             Sample products are created with a default title and price. You can
             remove them at any time.
           </p>
-          <Heading element='h4'>
+          <Heading element="h4">
             TOTAL PRODUCTS
-            <DisplayText size='medium'>
-              <TextStyle variation='strong'>
+            <DisplayText size="medium">
+              <TextStyle variation="strong">
                 {isLoadingCount ? "-" : data.count}
               </TextStyle>
             </DisplayText>

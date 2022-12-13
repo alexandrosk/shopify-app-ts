@@ -17,32 +17,32 @@ import { ProductsCard } from "../components";
 export default function HomePage() {
   return (
     <Page narrowWidth>
-      <TitleBar title='App name' primaryAction={null} />
+      <TitleBar title="App name" primaryAction={null} />
       <Layout>
         <Layout.Section>
           <Card sectioned>
             <Stack
               wrap={false}
-              spacing='extraTight'
-              distribution='trailing'
-              alignment='center'
+              spacing="extraTight"
+              distribution="trailing"
+              alignment="center"
             >
               <Stack.Item fill>
-                <TextContainer spacing='loose'>
+                <TextContainer spacing="loose">
                   <Heading>Nice work on building a Shopify app 🎉</Heading>
                   <p>
                     Your app is ready to explore! It contains everything you
                     need to get started including the{" "}
-                    <Link url='https://polaris.shopify.com/' external>
+                    <Link url="https://polaris.shopify.com/" external>
                       Polaris design system
                     </Link>
                     ,{" "}
-                    <Link url='https://shopify.dev/api/admin-graphql' external>
+                    <Link url="https://shopify.dev/api/admin-graphql" external>
                       Shopify Admin API
                     </Link>
                     , and{" "}
                     <Link
-                      url='https://shopify.dev/apps/tools/app-bridge'
+                      url="https://shopify.dev/apps/tools/app-bridge"
                       external
                     >
                       App Bridge
@@ -56,7 +56,7 @@ export default function HomePage() {
                   <p>
                     Learn more about building out your app in{" "}
                     <Link
-                      url='https://shopify.dev/apps/getting-started/add-functionality'
+                      url="https://shopify.dev/apps/getting-started/add-functionality"
                       external
                     >
                       this Shopify tutorial
@@ -69,7 +69,7 @@ export default function HomePage() {
                 <div style={{ padding: "0 20px" }}>
                   <Image
                     source={trophyImage}
-                    alt='Nice work on building a Shopify app'
+                    alt="Nice work on building a Shopify app"
                     width={120}
                   />
                 </div>
